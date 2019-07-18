@@ -7,13 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.example.stackanswers.ANSWER_URL
 import com.example.stackanswers.R
 import com.example.stackanswers.databinding.FragmentResultsSearchBinding
 import com.example.stackanswers.network.StackAnswerApi
-import com.example.stackanswers.start.StartFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -21,16 +20,6 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.lang.Exception
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-
-/**
- * A simple [Fragment] subclass.
- *
- */
 class SearchResultsFragment : Fragment() {
 
     // Set up the coroutine
@@ -38,6 +27,11 @@ class SearchResultsFragment : Fragment() {
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main )
 
     private lateinit var binding : FragmentResultsSearchBinding
+
+    private lateinit var questionTitle : String
+    private lateinit var questionBody : String
+    private lateinit var answerTitle: String
+    private lateinit var answerBody: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,6 +46,10 @@ class SearchResultsFragment : Fragment() {
 
         getStackExchangeQuestions(passedArg)
 
+        binding.readButton.setOnClickListener {
+            this.findNavController()
+                .navigate(SearchResultsFragmentDirections.actionSearchResultsFragmentToQuestionFragment(questionTitle, questionBody, answerTitle, answerBody))
+        }
         return binding.root
     }
 
@@ -69,9 +67,12 @@ class SearchResultsFragment : Fragment() {
                 // need to check that there is at least a question matching with the search query
                 if(response.items.isNotEmpty()) {
 
-                    binding.questionTitle.text = response.items.get(0).title
-                    Timber.i("Question title: ${response.items[0].title}")
-                    binding.questionBody.text = response.items.get(0).body
+                    questionTitle = response.items[0].title
+                    binding.questionTitle.text = questionTitle
+                    Timber.i("Question title: ${questionTitle}")
+
+                    questionBody = response.items[0].body
+                    binding.questionBody.text = questionBody
 
                     var topAnswerId = response.items.get(0).accepted_answer_id
                     binding.questionAnswer.text = topAnswerId.toString()
@@ -101,6 +102,9 @@ class SearchResultsFragment : Fragment() {
 
             try {
                 val answerResponse = getAnswersDeferred.await()
+
+                answerTitle = "TOP ANSWER"
+                answerBody = answerResponse.items[0].body
                 binding.questionAnswer.text = answerResponse.items[0].body
                 Timber.i("Top answer response: ${answerResponse.items[0].body}")
             } catch (e: Exception) {

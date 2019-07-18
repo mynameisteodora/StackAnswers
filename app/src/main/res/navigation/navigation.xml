@@ -6,11 +6,22 @@
     <fragment android:id="@+id/startFragment" android:name="com.example.stackanswers.start.StartFragment"
               android:label="StartFragment">
         <action android:id="@+id/action_startFragment_to_searchResultsFragment"
-                app:destination="@id/searchResultsFragment"/>
+                app:destination="@id/searchResultsFragment" app:enterAnim="@anim/slide_in_right"
+        />
     </fragment>
     <fragment android:id="@+id/searchResultsFragment"
               android:name="com.example.stackanswers.searchresults.SearchResultsFragment"
               android:label="SearchResultsFragment">
         <argument android:name="search_query" app:argType="string"/>
+        <action android:id="@+id/action_searchResultsFragment_to_questionFragment"
+                app:destination="@id/questionFragment" app:enterAnim="@anim/slide_in_right"
+        />
+    </fragment>
+    <fragment android:id="@+id/questionFragment" android:name="com.example.stackanswers.question.QuestionFragment"
+              android:label="QuestionFragment">
+        <argument android:name="question_title" app:argType="string"/>
+        <argument android:name="question_body" app:argType="string"/>
+        <argument android:name="answer_title" app:argType="string"/>
+        <argument android:name="answer_body" app:argType="string"/>
     </fragment>
 </navigation>
