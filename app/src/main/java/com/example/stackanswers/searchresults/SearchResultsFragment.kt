@@ -18,6 +18,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.lang.Exception
 
 // TODO: Rename parameter arguments, choose names that match
@@ -46,7 +47,7 @@ class SearchResultsFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_results_search, container, false)
         val passedArg = SearchResultsFragmentArgs.fromBundle(arguments!!).searchQuery
 
-        binding.searchBoxInfo.text = passedArg
+        //binding.searchBoxInfo.text = passedArg
         binding.searchBox.hint = passedArg
 
         getStackExchangeQuestions(passedArg)
@@ -69,20 +70,14 @@ class SearchResultsFragment : Fragment() {
                 if(response.items.isNotEmpty()) {
 
                     binding.questionTitle.text = response.items.get(0).title
+                    Timber.i("Question title: ${response.items[0].title}")
                     binding.questionBody.text = response.items.get(0).body
 
                     var topAnswerId = response.items.get(0).accepted_answer_id
                     binding.questionAnswer.text = topAnswerId.toString()
 
-                    // search for the top answer id for later display
-                    var getAnswersDeferred = StackAnswerApi.retrofitService.getAnswer(ANSWER_URL + topAnswerId!!)
-
-                    try {
-                        var answerResponse = getAnswersDeferred.await()
-                        binding.questionAnswer.text = answerResponse.items[0].body
-                    } catch (e: Exception) {
-                        Log.e("MainActivity", "This happened INCEPTION", e)
-                    }
+                    Timber.i("Top answer id: $topAnswerId")
+                    getTopAnswer(topAnswerId.toString())
                 }
                 else {
                     // if the search was invalid
@@ -95,6 +90,23 @@ class SearchResultsFragment : Fragment() {
                 Log.e("MainActivity", "This happened", e)
                 binding.questionTitle.text = e.toString()
             }
+        }
+
+    }
+
+    private fun getTopAnswer(answerId: String) {
+        coroutineScope.launch {
+            // search for the top answer id for later display
+            var getAnswersDeferred = StackAnswerApi.retrofitService.getAnswer(ANSWER_URL + answerId)
+
+            try {
+                val answerResponse = getAnswersDeferred.await()
+                binding.questionAnswer.text = answerResponse.items[0].body
+                Timber.i("Top answer response: ${answerResponse.items[0].body}")
+            } catch (e: Exception) {
+                Log.e("MainActivity", "This happened INCEPTION", e)
+            }
+
         }
 
     }
