@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/navigation" app:startDestination="@id/startFragment">
+
+    <fragment android:id="@+id/startFragment" android:name="com.example.stackanswers.start.StartFragment"
+              android:label="StartFragment">
+        <action android:id="@+id/action_startFragment_to_searchResultsFragment"
+                app:destination="@id/searchResultsFragment"/>
+    </fragment>
+    <fragment android:id="@+id/searchResultsFragment"
+              android:name="com.example.stackanswers.searchresults.SearchResultsFragment"
+              android:label="SearchResultsFragment"/>
+</navigation>
