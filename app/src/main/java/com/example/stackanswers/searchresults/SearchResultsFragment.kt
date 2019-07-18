@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
-import com.example.stackanswers.ANSWER_URL
 import com.example.stackanswers.R
 import com.example.stackanswers.databinding.FragmentResultsSearchBinding
 import com.example.stackanswers.network.StackAnswerApi
@@ -30,25 +29,21 @@ class SearchResultsFragment : Fragment() {
 
     private lateinit var questionTitle : String
     private lateinit var questionBody : String
-    private lateinit var answerTitle: String
-    private lateinit var answerBody: String
+    private lateinit var topAnswerId: String
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_results_search, container, false)
         val passedArg = SearchResultsFragmentArgs.fromBundle(arguments!!).searchQuery
 
-        //binding.searchBoxInfo.text = passedArg
         binding.searchBox.hint = passedArg
 
         getStackExchangeQuestions(passedArg)
 
         binding.readButton.setOnClickListener {
+            // TODO check if the search was valid
             this.findNavController()
-                .navigate(SearchResultsFragmentDirections.actionSearchResultsFragmentToQuestionFragment(questionTitle, questionBody, answerTitle, answerBody))
+                .navigate(SearchResultsFragmentDirections.actionSearchResultsFragmentToQuestionFragment(questionTitle, questionBody, topAnswerId))
         }
         return binding.root
     }
@@ -74,13 +69,14 @@ class SearchResultsFragment : Fragment() {
                     questionBody = response.items[0].body
                     binding.questionBody.text = questionBody
 
-                    var topAnswerId = response.items.get(0).accepted_answer_id
-                    binding.questionAnswer.text = topAnswerId.toString()
+                    topAnswerId = response.items.get(0).accepted_answer_id.toString()
+                    binding.questionAnswer.text = topAnswerId
 
                     Timber.i("Top answer id: $topAnswerId")
-                    getTopAnswer(topAnswerId.toString())
+                    //getTopAnswer(topAnswerId.toString())
                 }
                 else {
+                    // TODO place this in an showError() function
                     // if the search was invalid
                     binding.questionTitle.text = "Oops! We couldn't find anything :("
                     binding.questionBody.text = ""
@@ -88,29 +84,10 @@ class SearchResultsFragment : Fragment() {
                 }
 
             } catch (e: Exception) {
+                // TODO make function for pretty error handling
                 Log.e("MainActivity", "This happened", e)
                 binding.questionTitle.text = e.toString()
             }
-        }
-
-    }
-
-    private fun getTopAnswer(answerId: String) {
-        coroutineScope.launch {
-            // search for the top answer id for later display
-            var getAnswersDeferred = StackAnswerApi.retrofitService.getAnswer(ANSWER_URL + answerId)
-
-            try {
-                val answerResponse = getAnswersDeferred.await()
-
-                answerTitle = "TOP ANSWER"
-                answerBody = answerResponse.items[0].body
-                binding.questionAnswer.text = answerResponse.items[0].body
-                Timber.i("Top answer response: ${answerResponse.items[0].body}")
-            } catch (e: Exception) {
-                Log.e("MainActivity", "This happened INCEPTION", e)
-            }
-
         }
 
     }

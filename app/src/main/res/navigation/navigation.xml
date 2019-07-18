@@ -21,7 +21,6 @@
               android:label="QuestionFragment">
         <argument android:name="question_title" app:argType="string"/>
         <argument android:name="question_body" app:argType="string"/>
-        <argument android:name="answer_title" app:argType="string"/>
-        <argument android:name="answer_body" app:argType="string"/>
+        <argument android:name="top_answer_id" app:argType="string"/>
     </fragment>
 </navigation>

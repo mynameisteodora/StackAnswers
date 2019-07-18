@@ -26,6 +26,8 @@ class StartFragment: Fragment() {
                 .navigate(StartFragmentDirections.actionStartFragmentToSearchResultsFragment(binding.searchBox.text.toString()))
         }
 
+        // TODO add a list of predefined searches
+
         return binding.root
     }
 
