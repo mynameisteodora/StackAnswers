@@ -41,7 +41,16 @@ class SearchResultsFragment : Fragment() {
 
         binding.searchBox.hint = searchQuery
 
-        binding.questionList.adapter = SearchResultsAdapter()
+        binding.questionList.adapter = SearchResultsAdapter(SearchResultsAdapter.OnClickListener {
+            searchResultsViewModel.displayQuestion(it)
+        })
+
+        searchResultsViewModel.navigateToSelectedQuestion.observe(this, Observer {
+            if(null != it) {
+                this.findNavController().navigate(SearchResultsFragmentDirections.actionSearchResultsFragmentToQuestionFragment(it))
+                searchResultsViewModel.displayQuestionComplete()
+            }
+        })
 
 //        searchResultsViewModel.navigateToQuestion.observe(this, Observer {
 //            question ->

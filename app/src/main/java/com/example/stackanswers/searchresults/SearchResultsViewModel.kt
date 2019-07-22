@@ -24,13 +24,17 @@ class SearchResultsViewModel(val searchQuery: String, application: Application) 
     private lateinit var questionBody : String
     private lateinit var topAnswerId: String
 
-    private val _navigateToQuestion = MutableLiveData<Question>()
+    private val _navigateToSelectedQuestion = MutableLiveData<Question>()
 
-    val navigateToQuestion : LiveData<Question>
-        get() = _navigateToQuestion
+    val navigateToSelectedQuestion : LiveData<Question>
+        get() = _navigateToSelectedQuestion
 
-    fun doneNavigating() {
-        _navigateToQuestion.value = null
+    fun displayQuestion(question: Question) {
+        _navigateToSelectedQuestion.value = question
+    }
+
+    fun displayQuestionComplete() {
+        _navigateToSelectedQuestion.value = null
     }
 
     private val _questions = MutableLiveData<List<Question>>()

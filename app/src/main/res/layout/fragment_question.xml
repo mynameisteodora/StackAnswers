@@ -4,6 +4,11 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable name="viewModel"
+                  type="com.example.stackanswers.question.QuestionViewModel"/>
+    </data>
+
     <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -22,7 +27,7 @@
                     android:textStyle="bold"/>
 
             <TextView
-                    android:text="Question body"
+                    android:text="@{viewModel.selectedQuestion.body}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/question_body" android:layout_marginTop="8dp"

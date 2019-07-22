@@ -1,7 +1,9 @@
 package com.example.stackanswers.network
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.android.parcel.Parcelize
 import java.util.*
 
 enum class ItemType(value: String) { QUESTION("questions"), ANSWER("answer") }
@@ -24,7 +26,9 @@ data class StackAnswerCollection(
     @Json(name = "total") val total: Int?
 )
 
+
 @JsonClass(generateAdapter = true)
+@Parcelize
 data class Question(
     @Json(name = "accepted_answer_id") val accepted_answer_id: Int?,
     @Json(name = "is_answered") val is_answered: Boolean,
@@ -32,7 +36,7 @@ data class Question(
     @Json(name = "question_id") val question_id: Int,
     @Json(name = "title") val title: String,
     @Json(name = "score") val score: Int
-)
+) : Parcelable
 
 @JsonClass(generateAdapter = true)
 data class Answer(

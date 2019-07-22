@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import com.example.stackanswers.ANSWER_URL
 import com.example.stackanswers.R
 import com.example.stackanswers.databinding.FragmentQuestionBinding
@@ -28,17 +29,27 @@ class QuestionFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_question, container, false)
-        val questionTitle = QuestionFragmentArgs.fromBundle(arguments!!).questionTitle
-        val questionBody = QuestionFragmentArgs.fromBundle(arguments!!).questionBody
-        val topAnswerId = QuestionFragmentArgs.fromBundle(arguments!!).topAnswerId
+        val application = requireNotNull(activity).application
+        val binding = FragmentQuestionBinding.inflate(inflater)
+        binding.setLifecycleOwner(this)
 
-        binding.questionTitle.text = questionTitle
-        binding.questionBody.text = questionBody
-        binding.answerTitle.text = "Top Answer Title"
+        val question = QuestionFragmentArgs.fromBundle(arguments!!).question
+        val viewModelFactory = QuestionViewModelFactory(question, application)
 
-        getTopAnswer(topAnswerId)
+        binding.viewModel = ViewModelProviders.of(
+            this, viewModelFactory).get(QuestionViewModel::class.java)
 
+        //binding = DataBindingUtil.inflate(inflater, R.layout.fragment_question, container, false)
+//        val questionTitle = QuestionFragmentArgs.fromBundle(arguments!!).questionTitle
+//        val questionBody = QuestionFragmentArgs.fromBundle(arguments!!).questionBody
+//        val topAnswerId = QuestionFragmentArgs.fromBundle(arguments!!).topAnswerId
+
+//        binding.questionTitle.text = questionTitle
+//        binding.questionBody.text = questionBody
+//        binding.answerTitle.text = "Top Answer Title"
+//
+//        getTopAnswer(topAnswerId)
+        val topAnswerId = question.accepted_answer_id
         return binding.root
     }
 

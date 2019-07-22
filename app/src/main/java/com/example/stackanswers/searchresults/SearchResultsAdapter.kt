@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.stackanswers.databinding.ListItemQuestionBinding
 import com.example.stackanswers.network.Question
 
-class SearchResultsAdapter : ListAdapter<Question, SearchResultsAdapter.QuestionViewHolder>(DiffCallback) {
+class SearchResultsAdapter(val onClickListener: OnClickListener) : ListAdapter<Question, SearchResultsAdapter.QuestionViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchResultsAdapter.QuestionViewHolder {
         return QuestionViewHolder(ListItemQuestionBinding.inflate(LayoutInflater.from(parent.context)))
@@ -17,6 +17,9 @@ class SearchResultsAdapter : ListAdapter<Question, SearchResultsAdapter.Question
     override fun onBindViewHolder(holder: SearchResultsAdapter.QuestionViewHolder, position: Int) {
         val question = getItem(position)
         holder.bind(question)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(question)
+        }
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<Question>() {
@@ -34,5 +37,9 @@ class SearchResultsAdapter : ListAdapter<Question, SearchResultsAdapter.Question
             binding.question = question
             binding.executePendingBindings()
         }
+    }
+
+    class OnClickListener(val clickListener: (question: Question) -> Unit) {
+        fun onClick(question: Question) = clickListener(question)
     }
 }

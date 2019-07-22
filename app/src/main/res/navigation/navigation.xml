@@ -19,8 +19,6 @@
     </fragment>
     <fragment android:id="@+id/questionFragment" android:name="com.example.stackanswers.question.QuestionFragment"
               android:label="QuestionFragment">
-        <argument android:name="question_title" app:argType="string"/>
-        <argument android:name="question_body" app:argType="string"/>
-        <argument android:name="top_answer_id" app:argType="string"/>
+        <argument android:name="question" app:argType="com.example.stackanswers.network.Question"/>
     </fragment>
 </navigation>
