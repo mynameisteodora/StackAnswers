@@ -41,16 +41,18 @@ class SearchResultsFragment : Fragment() {
 
         binding.searchBox.hint = searchQuery
 
-        searchResultsViewModel.navigateToQuestion.observe(this, Observer {
-            question ->
-            question?.let {
-                this.findNavController().navigate(
-                    SearchResultsFragmentDirections
-                        .actionSearchResultsFragmentToQuestionFragment(question.title, question.body, question.accepted_answer_id.toString())
-                )
-                searchResultsViewModel.doneNavigating()
-            }
-        })
+        binding.questionList.adapter = SearchResultsAdapter()
+
+//        searchResultsViewModel.navigateToQuestion.observe(this, Observer {
+//            question ->
+//            question?.let {
+//                this.findNavController().navigate(
+//                    SearchResultsFragmentDirections
+//                        .actionSearchResultsFragmentToQuestionFragment(question.title, question.body, question.accepted_answer_id.toString())
+//                )
+//                searchResultsViewModel.doneNavigating()
+//            }
+//        })
 
 
         return binding.root

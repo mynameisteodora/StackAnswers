@@ -62,4 +62,7 @@ dependencies {
 
     // Lifecycle dependency
     implementation "androidx.lifecycle:lifecycle-extensions:$version_lifecycle_extensions"
+
+    // Recyclerview dependency
+    implementation "androidx.recyclerview:recyclerview:$version_recyclerview"
 }

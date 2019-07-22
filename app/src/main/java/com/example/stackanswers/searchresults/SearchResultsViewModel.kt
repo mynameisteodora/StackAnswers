@@ -33,10 +33,10 @@ class SearchResultsViewModel(val searchQuery: String, application: Application) 
         _navigateToQuestion.value = null
     }
 
-    private val _question = MutableLiveData<Question>()
+    private val _questions = MutableLiveData<List<Question>>()
 
-    val question: LiveData<Question>
-        get() = _question
+    val questions: LiveData<List<Question>>
+        get() = _questions
 
     init {
         getStackExchangeQuestions(searchQuery)
@@ -54,7 +54,7 @@ class SearchResultsViewModel(val searchQuery: String, application: Application) 
 
                 var response = getQuestionsDeferred.await()
 
-                // need to check that there is at least a question matching with the search query
+                // need to check that there is at least a questions matching with the search query
                 if(response.items.isNotEmpty()) {
 
 //                    questionTitle = response.items[0].title
@@ -66,8 +66,9 @@ class SearchResultsViewModel(val searchQuery: String, application: Application) 
 //
                     topAnswerId = response.items.get(0).accepted_answer_id.toString()
 //                    binding.questionAnswer.text = topAnswerId
+                    Timber.i("Type for response.items: ${response.items.javaClass.name}")
 
-                    _question.value = response.items[0]
+                    _questions.value = response.items as List<Question>
 
                     Timber.i("Top answer id: $topAnswerId")
                     //getTopAnswer(topAnswerId.toString())

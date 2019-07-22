@@ -4,12 +4,12 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import java.util.*
 
-enum class ItemType(value: String) { QUESTION("question"), ANSWER("answer") }
+enum class ItemType(value: String) { QUESTION("questions"), ANSWER("answer") }
 
 @JsonClass(generateAdapter = true)
 data class StackAnswerSearchExcerpt(
     @Json(name = "has_more") val has_more: Boolean,
-    @field:Json(name = "items") val items: Array<Question>,
+    @field:Json(name = "items") val items: List<Question>,
     @Json(name = "quota_max") val quota_max: Int,
     @Json(name = "quota_remaining") val quota_remaining: Int,
     @Json(name = "total") val total: Int?
@@ -18,7 +18,7 @@ data class StackAnswerSearchExcerpt(
 @JsonClass(generateAdapter = true)
 data class StackAnswerCollection(
     @Json(name = "has_more") val has_more: Boolean,
-    @field:Json(name = "items") val items: Array<Answer>,
+    @field:Json(name = "items") val items: List<Answer>,
     @Json(name = "quota_max") val quota_max: Int,
     @Json(name = "quota_remaining") val quota_remaining: Int,
     @Json(name = "total") val total: Int?
