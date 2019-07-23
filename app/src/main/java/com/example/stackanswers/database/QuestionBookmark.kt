@@ -18,5 +18,8 @@ data class QuestionBookmark (
     var answerId: Int,
 
     @ColumnInfo(name = "answer_body")
-    var answerBody: String
+    var answerBody: String,
+
+    @ColumnInfo(name = "date_saved")
+    var dateSaved: Long = System.currentTimeMillis()
 )

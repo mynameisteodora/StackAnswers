@@ -6,6 +6,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.stackanswers.ANSWER_URL
+import com.example.stackanswers.database.QuestionBookmark
+import com.example.stackanswers.database.QuestionDatabaseDao
 import com.example.stackanswers.network.Answer
 import com.example.stackanswers.network.Question
 import com.example.stackanswers.network.StackAnswerApi
@@ -15,8 +17,9 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.lang.Exception
+import javax.sql.DataSource
 
-class QuestionViewModel(question: Question, app: Application) : AndroidViewModel(app) {
+class QuestionViewModel(question: Question, dataSource: QuestionDatabaseDao, app: Application) : AndroidViewModel(app) {
 
     // Set up the coroutine
     private var viewModelJob = Job()
@@ -31,6 +34,8 @@ class QuestionViewModel(question: Question, app: Application) : AndroidViewModel
 
     val topAnswer : LiveData<Answer>
         get() = _topAnswer
+
+    private var questionBookmark = MutableLiveData<QuestionBookmark?>()
 
     init {
         _selectedQuestion.value = question
@@ -56,6 +61,11 @@ class QuestionViewModel(question: Question, app: Application) : AndroidViewModel
 
         }
 
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
     }
 
 }

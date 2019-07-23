@@ -84,4 +84,9 @@ class SearchResultsViewModel(val searchQuery: String, application: Application) 
 
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
+    }
+
 }

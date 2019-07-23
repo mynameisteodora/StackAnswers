@@ -73,6 +73,8 @@ dependencies {
     // Interceptor for http debugging
     implementation "com.squareup.okhttp3:okhttp:4.0.1"
     implementation "com.squareup.okhttp3:logging-interceptor:4.0.1"
-    implementation 'androidx.room:room-runtime:2.1.0'
-    annotationProcessor 'androidx.room:room-compiler:2.1.0'
+
+    // Room and Lifecycle dependencies
+    implementation "androidx.room:room-runtime:$version_room"
+    kapt "androidx.room:room-compiler:$version_room"
 }
