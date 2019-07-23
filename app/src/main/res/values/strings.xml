@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">StackAnswers</string>
-    <string name="search_box_hint">Ask me a question</string>
+    <string name="search_box_hint">Kotlin, Java etc</string>
     <string name="search_box_info">Your answers will be displayed here.</string>
-    <string name="search">Search!</string>
+    <string name="search">What do you want to know?</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

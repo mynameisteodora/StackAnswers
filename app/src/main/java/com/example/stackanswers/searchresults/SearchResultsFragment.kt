@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.stackanswers.R
 import com.example.stackanswers.databinding.FragmentResultsSearchBinding
 import timber.log.Timber
@@ -51,17 +52,6 @@ class SearchResultsFragment : Fragment() {
                 searchResultsViewModel.displayQuestionComplete()
             }
         })
-
-//        searchResultsViewModel.navigateToQuestion.observe(this, Observer {
-//            question ->
-//            question?.let {
-//                this.findNavController().navigate(
-//                    SearchResultsFragmentDirections
-//                        .actionSearchResultsFragmentToQuestionFragment(question.title, question.body, question.accepted_answer_id.toString())
-//                )
-//                searchResultsViewModel.doneNavigating()
-//            }
-//        })
 
 
         return binding.root

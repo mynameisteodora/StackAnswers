@@ -20,8 +20,6 @@ class SearchResultsViewModel(val searchQuery: String, application: Application) 
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main )
 
-    private lateinit var questionTitle : String
-    private lateinit var questionBody : String
     private lateinit var topAnswerId: String
 
     private val _navigateToSelectedQuestion = MutableLiveData<Question>()
@@ -60,16 +58,8 @@ class SearchResultsViewModel(val searchQuery: String, application: Application) 
 
                 // need to check that there is at least a questions matching with the search query
                 if(response.items.isNotEmpty()) {
-
-//                    questionTitle = response.items[0].title
-//                    binding.questionTitle.text = questionTitle
-//                    Timber.i("Question title: ${questionTitle}")
-//
-//                    questionBody = response.items[0].body
-//                    binding.questionBody.text = questionBody
-//
                     topAnswerId = response.items.get(0).accepted_answer_id.toString()
-//                    binding.questionAnswer.text = topAnswerId
+
                     Timber.i("Type for response.items: ${response.items.javaClass.name}")
 
                     _questions.value = response.items as List<Question>
