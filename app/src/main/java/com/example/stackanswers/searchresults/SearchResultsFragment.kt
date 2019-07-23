@@ -2,10 +2,8 @@ package com.example.stackanswers.searchresults
 
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -40,7 +38,9 @@ class SearchResultsFragment : Fragment() {
         binding.setLifecycleOwner(this)
         binding.searchResultsViewModel = searchResultsViewModel
 
-        binding.searchBox.hint = searchQuery
+        var searchQueryText = "$searchQuery "
+
+        binding.searchQuery.text = searchQueryText
 
         binding.questionList.adapter = SearchResultsAdapter(SearchResultsAdapter.OnClickListener {
             searchResultsViewModel.displayQuestion(it)
@@ -53,8 +53,14 @@ class SearchResultsFragment : Fragment() {
             }
         })
 
+        setHasOptionsMenu(true)
 
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.overflow_menu, menu)
     }
 
 }

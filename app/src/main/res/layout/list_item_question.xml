@@ -13,7 +13,8 @@
             android:orientation="vertical"
             android:layout_margin="8dp"
             android:elevation="4dp"
-            android:background="@drawable/myrect">
+            android:background="@drawable/myrect"
+            android:padding="16dp">
 
 
         <TextView
@@ -26,7 +27,7 @@
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"/>
 
         <TextView
-                android:text="@{Integer.toString(question.score)}"
+                android:text="@{`Score: ` + Integer.toString(question.score)}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/question_score"
@@ -35,11 +36,12 @@
                 android:layout_marginStart="8dp" android:layout_marginTop="16dp"/>
         <View
                 android:layout_width="fill_parent"
-                android:layout_height="2dp"
-                android:id="@+id/textView2" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
-                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                android:layout_height="1dp"
+                android:id="@+id/textView2" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="@+id/question_score"
-                android:background="#1A237E"/>
+                android:layout_marginTop="4dp"
+                android:background="@color/primaryDarkColor"/>
     </LinearLayout>
 
 </layout>

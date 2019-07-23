@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         Timber.plant(Timber.DebugTree())
 
         supportActionBar!!.elevation = 0F
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
 
 
 

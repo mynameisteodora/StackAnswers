@@ -2,10 +2,8 @@ package com.example.stackanswers.question
 
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.example.stackanswers.ANSWER_URL
@@ -33,9 +31,14 @@ class QuestionFragment : Fragment() {
         binding.viewModel = ViewModelProviders.of(
             this, viewModelFactory).get(QuestionViewModel::class.java)
 
+        setHasOptionsMenu(true)
+
         return binding.root
     }
 
-
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.overflow_menu, menu)
+    }
 
 }

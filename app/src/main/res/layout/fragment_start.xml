@@ -11,15 +11,16 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/linear_layout_wrapper"
-                    android:layout_width="411dp"
-                    android:layout_height="176dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:orientation="horizontal"
-                    android:background="@color/primaryColor" android:layout_marginBottom="16dp"
-                    app:layout_constraintBottom_toTopOf="@+id/search_box_info" android:padding="10dp"
-                    android:gravity="center_horizontal|center_vertical">
+                    android:background="@drawable/background_search" android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toTopOf="@+id/search_box_info"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:padding="12dp">
 
 
                 <EditText
@@ -53,7 +54,7 @@
                         android:id="@+id/textView" app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginBottom="8dp"
                         app:layout_constraintBottom_toTopOf="@+id/search_box" android:textSize="18sp"
-                        android:fontFamily="@font/roboto" android:textColor="@color/white" android:textStyle="bold"
+                        android:fontFamily="@font/roboto" android:textColor="@color/white"
                         android:padding="8sp"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -69,28 +70,28 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Is Kotlin hard to learn?"
-                        android:padding="8sp"
+                        android:padding="8dp"
                 />
 
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Should I be a programmer?"
-                        android:padding="8sp"
+                        android:padding="8dp"
                 />
 
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Why is Java so ugly?"
-                        android:padding="8sp"
+                        android:text="Why is Java so sad?"
+                        android:padding="8dp"
                 />
 
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Python list slicing for pandas"
-                        android:padding="8sp"
+                        android:padding="8dp"
                 />
 
 
@@ -105,7 +106,8 @@
                     app:layout_constraintTop_toBottomOf="@+id/linear_layout_wrapper"
                     app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
-                    android:padding="8sp"/>
+                    android:padding="8sp"
+                    android:fontFamily="@font/roboto"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
