@@ -5,6 +5,8 @@ import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.squareup.moshi.Moshi
 import kotlinx.coroutines.Deferred
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -24,6 +26,13 @@ private const val SORTING_CRITERIA = "relevance"
 const val ANSWER_URL = "/answers/"
 private const val CLIENT_KEY = "62PZ8TzM3yuxwwGS5fwx9Q(("
 
+// add interceptor for debugging
+private val interceptor = HttpLoggingInterceptor()
+
+private val client = OkHttpClient.Builder()
+    .addNetworkInterceptor(HttpLoggingInterceptor())
+    .build()
+
 // build the Moshi object
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -31,6 +40,7 @@ private val moshi = Moshi.Builder()
 
 // build the Retrofit object
 private val retrofit = Retrofit.Builder()
+    .client(client)
     .addConverterFactory(MoshiConverterFactory.create(moshi))
     .addCallAdapterFactory(CoroutineCallAdapterFactory())
     .baseUrl(BASE_URL)
