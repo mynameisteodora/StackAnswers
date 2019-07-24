@@ -9,10 +9,10 @@
         app:showAsAction="ifRoom"/>
 
     <item
-        android:id="@+id/hamburger"
+        android:id="@+id/share"
         android:enabled="true"
-        android:icon="@mipmap/app_icon_custom"
-        android:title="Hamburger"
+        android:icon="@drawable/ic_share"
+        android:title="Share"
         android:visible="true"
         app:showAsAction="ifRoom" />
 

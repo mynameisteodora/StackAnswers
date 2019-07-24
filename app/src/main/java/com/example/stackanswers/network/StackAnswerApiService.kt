@@ -20,6 +20,8 @@ private const val SEARCH_METHOD = "search/advanced"
 private const val SEARCH_SITE = "stackoverflow"
 private const val FILTER_QUESTION_BODY_ON = "!9Z(-wwYGT"
 private const val FILTER_ANSWER_BODY_ON = "!9Z(-wzu0T"
+private const val FILTER_SHARE_LINK_ON = "!9Z(-wn8Vv"
+private const val FILTER_SHARE_AND_BODY = "!-*jbN)rDh1qP"
 private const val FILTER_QUESTION_BODY_MARKDOWN = "!9Z(-wwK4f"
 private const val FILTER_ANSWER_BODY_MARKDOWN = "!9Z(-wzftf"
 private const val SORTING_CRITERIA = "relevance"
@@ -46,12 +48,13 @@ private val retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
     .build()
 
+
 interface StackAnswerApiService {
     @GET(SEARCH_METHOD)
     fun getQuestions(
         @Query("q") question: String,
         @Query("site") site: String = SEARCH_SITE,
-        @Query("filter") filter: String = FILTER_QUESTION_BODY_ON,
+        @Query("filter") filter: String = FILTER_SHARE_AND_BODY,
         @Query("accepted") accepted_answer: Boolean = true,
         @Query("sort") sort: String = SORTING_CRITERIA):
             Deferred<StackAnswerSearchExcerpt>
@@ -71,4 +74,5 @@ object StackAnswerApi {
     val retrofitService: StackAnswerApiService by lazy {
         retrofit.create(StackAnswerApiService::class.java)
     }
+
 }

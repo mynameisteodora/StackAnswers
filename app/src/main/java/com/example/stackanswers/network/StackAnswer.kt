@@ -35,7 +35,8 @@ data class Question(
     @Json(name = "body") val body: String,
     @Json(name = "question_id") val question_id: Int,
     @Json(name = "title") val title: String,
-    @Json(name = "score") val score: Int
+    @Json(name = "score") val score: Int,
+    @Json(name = "share_link") val share_link: String
 ) : Parcelable
 
 @JsonClass(generateAdapter = true)

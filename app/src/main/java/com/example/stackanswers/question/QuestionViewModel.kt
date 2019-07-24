@@ -34,6 +34,10 @@ class QuestionViewModel(question: Question, val dataSource: QuestionDatabaseDao,
 
     private var questionBookmark = MutableLiveData<QuestionBookmark?>()
 
+    private val _bookmarkedQuestion = MutableLiveData<Boolean>()
+    val bookmarkedQuestion : LiveData<Boolean>
+        get() = _bookmarkedQuestion
+
     init {
         _selectedQuestion.value = question
         getTopAnswer(question.accepted_answer_id.toString())
@@ -60,22 +64,23 @@ class QuestionViewModel(question: Question, val dataSource: QuestionDatabaseDao,
 
     }
 
-    fun onSelectBookmark() {
-        coroutineScope.launch {
-            val newBookmark = QuestionBookmark(_selectedQuestion.value!!.question_id,
-                                                _selectedQuestion.value!!.body,
-                                                _topAnswer.value!!.answer_id,
-                                                _topAnswer.value!!.body)
-            insert(newBookmark)
-        }
-    }
-
-    private suspend fun insert(bookmark: QuestionBookmark) {
-        withContext(Dispatchers.IO) {
-            dataSource.insert(bookmark)
-            Timber.i("Inserted new bookmark")
-        }
-    }
+//    fun onSelectBookmark() {
+//        coroutineScope.launch {
+//            val newBookmark = QuestionBookmark(_selectedQuestion.value!!.question_id,
+//                                                _selectedQuestion.value!!.body,
+//                                                _topAnswer.value!!.answer_id,
+//                                                _topAnswer.value!!.body)
+//            insert(newBookmark)
+//            _bookmarkedQuestion.value = true
+//        }
+//    }
+//
+//    private suspend fun insert(bookmark: QuestionBookmark) {
+//        withContext(Dispatchers.IO) {
+//            dataSource.insert(bookmark)
+//            Timber.i("Inserted new bookmark")
+//        }
+//    }
 
     override fun onCleared() {
         super.onCleared()
