@@ -1,7 +1,10 @@
 package com.example.stackanswers.start
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.view.*
+import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -29,6 +32,7 @@ class StartFragment: Fragment() {
         binding.searchButton.setOnClickListener {
             this.findNavController()
                 .navigate(StartFragmentDirections.actionStartFragmentToSearchResultsFragment(binding.searchBox.text.toString()))
+            hideKeyboard(this.activity!!)
         }
 
         // TODO add a list of predefined searches
@@ -41,6 +45,16 @@ class StartFragment: Fragment() {
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater?.inflate(R.menu.overflow_menu, menu)
+    }
+
+    fun hideKeyboard(activity: Activity) {
+        val inputManager = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+
+        // check if no view has focus
+        var currentFocusedView = activity.currentFocus
+        if(currentFocusedView != null) {
+            inputManager.hideSoftInputFromWindow(currentFocusedView.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+        }
     }
 
 }

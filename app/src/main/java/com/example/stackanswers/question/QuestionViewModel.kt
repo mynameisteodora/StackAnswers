@@ -11,15 +11,12 @@ import com.example.stackanswers.database.QuestionDatabaseDao
 import com.example.stackanswers.network.Answer
 import com.example.stackanswers.network.Question
 import com.example.stackanswers.network.StackAnswerApi
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import timber.log.Timber
 import java.lang.Exception
 import javax.sql.DataSource
 
-class QuestionViewModel(question: Question, dataSource: QuestionDatabaseDao, app: Application) : AndroidViewModel(app) {
+class QuestionViewModel(question: Question, val dataSource: QuestionDatabaseDao, app: Application) : AndroidViewModel(app) {
 
     // Set up the coroutine
     private var viewModelJob = Job()
@@ -61,6 +58,23 @@ class QuestionViewModel(question: Question, dataSource: QuestionDatabaseDao, app
 
         }
 
+    }
+
+    fun onSelectBookmark() {
+        coroutineScope.launch {
+            val newBookmark = QuestionBookmark(_selectedQuestion.value!!.question_id,
+                                                _selectedQuestion.value!!.body,
+                                                _topAnswer.value!!.answer_id,
+                                                _topAnswer.value!!.body)
+            insert(newBookmark)
+        }
+    }
+
+    private suspend fun insert(bookmark: QuestionBookmark) {
+        withContext(Dispatchers.IO) {
+            dataSource.insert(bookmark)
+            Timber.i("Inserted new bookmark")
+        }
     }
 
     override fun onCleared() {

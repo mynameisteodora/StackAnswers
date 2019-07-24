@@ -8,7 +8,7 @@ import com.example.stackanswers.network.Question
 
 @Entity(tableName = "question_bookmark_table")
 data class QuestionBookmark (
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     var questionId: Int,
 
     @ColumnInfo(name = "question_body")
