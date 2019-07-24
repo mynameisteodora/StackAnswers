@@ -2,6 +2,7 @@ package com.example.stackanswers.start
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.InputMethodManager
@@ -9,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.stackanswers.R
+import com.example.stackanswers.bookmarks.Bookmarks
 import com.example.stackanswers.database.QuestionBookmarkDatabase
 import com.example.stackanswers.databinding.FragmentStartBinding
 
@@ -45,6 +47,18 @@ class StartFragment: Fragment() {
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater?.inflate(R.menu.overflow_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item!!.itemId) {
+            R.id.bookmarks -> {
+                this.startActivity(Intent(this.activity,Bookmarks::class.java))
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     fun hideKeyboard(activity: Activity) {

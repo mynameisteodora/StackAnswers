@@ -6,4 +6,10 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content">
 
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hello world! Let's display the first title from the database here."
+            android:id="@+id/bookmark_title"/>
+
 </LinearLayout>
