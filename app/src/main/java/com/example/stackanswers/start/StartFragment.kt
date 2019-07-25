@@ -10,9 +10,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.stackanswers.R
-import com.example.stackanswers.bookmarks.Bookmarks
+import com.example.stackanswers.bookmarks.BookmarksActivity
 import com.example.stackanswers.database.QuestionBookmarkDatabase
 import com.example.stackanswers.databinding.FragmentStartBinding
+import com.example.stackanswers.settings.SettingsActivity
 
 
 class StartFragment: Fragment() {
@@ -52,8 +53,11 @@ class StartFragment: Fragment() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when(item!!.itemId) {
             R.id.bookmarks -> {
-                this.startActivity(Intent(this.activity,Bookmarks::class.java))
+                this.startActivity(Intent(this.activity, BookmarksActivity::class.java))
                 return true
+            }
+            R.id.settings -> {
+                this.startActivity(Intent(this.activity, SettingsActivity::class.java))
             }
             else -> super.onOptionsItemSelected(item)
 
