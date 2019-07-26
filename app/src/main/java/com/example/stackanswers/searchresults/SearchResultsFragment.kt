@@ -8,7 +8,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.stackanswers.R
 import com.example.stackanswers.databinding.FragmentResultsSearchBinding
 import timber.log.Timber
@@ -60,7 +59,7 @@ class SearchResultsFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater?.inflate(R.menu.overflow_menu, menu)
+        inflater?.inflate(R.menu.overflow_menu_start, menu)
     }
 
 }

@@ -23,4 +23,10 @@ interface QuestionDatabaseDao {
 
     @Query("SELECT * FROM question_bookmark_table ORDER BY date_saved DESC LIMIT 1")
     fun getLastSavedQuestion(): QuestionBookmark?
+
+    @Query("DELETE FROM question_bookmark_table WHERE questionId = :key")
+    fun delete(key: Int)
+
+    @Query("SELECT COUNT(*) FROM question_bookmark_table WHERE questionId = :key")
+    fun checkItemExists(key: Int): Int
 }

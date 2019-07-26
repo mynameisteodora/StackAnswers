@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+            android:id="@+id/set_bookmark"
+            android:enabled="true"
+            android:icon="@drawable/ic_bookmark"
+            android:title="Bookmark"
+            android:visible="true"
+            app:showAsAction="ifRoom"
+            android:checked="false"/>
+
+    <item
+            android:id="@+id/share"
+            android:enabled="true"
+            android:icon="@drawable/ic_share"
+            android:title="Share"
+            android:visible="true"
+            app:showAsAction="ifRoom" />
+
+    <item
+            android:id="@+id/settings"
+            android:enabled="true"
+            android:title="Settings"
+            android:icon="@drawable/ic_settings"
+            android:visible="true"
+            app:showAsAction="ifRoom" />
+
+
+</menu>

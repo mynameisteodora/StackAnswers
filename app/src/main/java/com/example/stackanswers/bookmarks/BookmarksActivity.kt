@@ -9,7 +9,6 @@ import com.example.stackanswers.database.QuestionBookmark
 import com.example.stackanswers.database.QuestionBookmarkDatabase
 import com.example.stackanswers.database.QuestionDatabaseDao
 import kotlinx.coroutines.*
-import org.w3c.dom.Text
 
 class BookmarksActivity : AppCompatActivity() {
 
@@ -29,9 +28,6 @@ class BookmarksActivity : AppCompatActivity() {
 
         bookmarkTitle = findViewById<TextView>(R.id.bookmark_title)
 
-        // get the intent that started this activity
-        var intentThatStartedThisActivity = intent
-
         coroutineScope.launch {
             updateTitle()
             bookmarkTitle.text = queryResult!!.questionBody
@@ -48,7 +44,7 @@ class BookmarksActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
-        inflater?.inflate(R.menu.overflow_menu, menu)
+        inflater?.inflate(R.menu.overflow_menu_start, menu)
         return true
     }
 }

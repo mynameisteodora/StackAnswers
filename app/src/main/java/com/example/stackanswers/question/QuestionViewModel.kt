@@ -2,6 +2,7 @@ package com.example.stackanswers.question
 
 import android.app.Application
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -37,8 +38,13 @@ class QuestionViewModel(question: Question, val dataSource: QuestionDatabaseDao,
     val bookmarkedQuestion : LiveData<Boolean>
         get() = _bookmarkedQuestion
 
+    private val _questionInDatabase = MutableLiveData<Boolean>()
+    val questionInDatabase : LiveData<Boolean>
+        get() = _questionInDatabase
+
     init {
         _selectedQuestion.value = question
+        checkQuestionInDatabase(question.question_id)
         getTopAnswer(question.accepted_answer_id.toString())
     }
 
@@ -63,23 +69,21 @@ class QuestionViewModel(question: Question, val dataSource: QuestionDatabaseDao,
 
     }
 
-//    fun onSelectBookmark() {
-//        coroutineScope.launch {
-//            val newBookmark = QuestionBookmark(_selectedQuestion.value!!.question_id,
-//                                                _selectedQuestion.value!!.body,
-//                                                _topAnswer.value!!.answer_id,
-//                                                _topAnswer.value!!.body)
-//            insert(newBookmark)
-//            _bookmarkedQuestion.value = true
-//        }
-//    }
-//
-//    private suspend fun insert(bookmark: QuestionBookmark) {
-//        withContext(Dispatchers.IO) {
-//            dataSource.insert(bookmark)
-//            Timber.i("Inserted new bookmark")
-//        }
-//    }
+    private fun checkQuestionInDatabase(questionId : Int) {
+        coroutineScope.launch {
+            var response : Boolean = true
+            withContext(Dispatchers.IO) {
+                val result = dataSource.checkItemExists(questionId)
+
+                response = result == 1
+            }
+
+            _questionInDatabase.value = response
+        }
+
+    }
+
+
 
     override fun onCleared() {
         super.onCleared()

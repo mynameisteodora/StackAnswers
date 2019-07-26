@@ -3,7 +3,6 @@ package com.example.stackanswers.start
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.InputMethodManager
@@ -54,7 +53,7 @@ class StartFragment: Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater?.inflate(R.menu.overflow_menu, menu)
+        inflater?.inflate(R.menu.overflow_menu_start, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
