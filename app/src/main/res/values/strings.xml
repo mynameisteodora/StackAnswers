@@ -9,4 +9,5 @@
     <string name="top_answer">Top Answer</string>
     <!-- TODO: find a way to share the link to the question-->
     <string name="share_question">Have you seen this question? %1$s</string>
+    <string name="show_suggestions_key">show_suggestions</string>
 </resources>

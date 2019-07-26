@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.stackanswers.ANSWER_URL
+import com.example.stackanswers.start.ANSWER_URL
 import com.example.stackanswers.database.QuestionBookmark
 import com.example.stackanswers.database.QuestionDatabaseDao
 import com.example.stackanswers.network.Answer
@@ -14,7 +14,6 @@ import com.example.stackanswers.network.StackAnswerApi
 import kotlinx.coroutines.*
 import timber.log.Timber
 import java.lang.Exception
-import javax.sql.DataSource
 
 class QuestionViewModel(question: Question, val dataSource: QuestionDatabaseDao, app: Application) : AndroidViewModel(app) {
 

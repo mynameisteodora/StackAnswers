@@ -1,9 +1,10 @@
-package com.example.stackanswers
+package com.example.stackanswers.start
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import com.example.stackanswers.R
 import com.example.stackanswers.bookmarks.BookmarksActivity
 import com.example.stackanswers.settings.SettingsActivity
 import timber.log.Timber

@@ -3,12 +3,14 @@ package com.example.stackanswers.start
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.preference.PreferenceManager
 import com.example.stackanswers.R
 import com.example.stackanswers.bookmarks.BookmarksActivity
 import com.example.stackanswers.database.QuestionBookmarkDatabase
@@ -45,6 +47,11 @@ class StartFragment: Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        defaultSetup()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater?.inflate(R.menu.overflow_menu, menu)
@@ -73,6 +80,21 @@ class StartFragment: Fragment() {
         if(currentFocusedView != null) {
             inputManager.hideSoftInputFromWindow(currentFocusedView.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
         }
+    }
+
+    private fun defaultSetup() {
+        // This is an instance of the shared preferences file
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.activity)
+
+        val showSuggestions = sharedPreferences.getBoolean(getString(R.string.show_suggestions_key), true)
+
+        val visibility = when(showSuggestions) {
+            true -> View.VISIBLE
+            else -> View.INVISIBLE
+        }
+
+
+        binding.suggestionsView.visibility = visibility
     }
 
 }

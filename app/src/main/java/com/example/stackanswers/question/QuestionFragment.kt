@@ -2,14 +2,11 @@ package com.example.stackanswers.question
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.example.stackanswers.ANSWER_URL
 import com.example.stackanswers.R
 import com.example.stackanswers.database.QuestionBookmark
 import com.example.stackanswers.database.QuestionBookmarkDatabase
@@ -17,12 +14,8 @@ import com.example.stackanswers.database.QuestionDatabaseDao
 import com.example.stackanswers.databinding.FragmentQuestionBinding
 import com.example.stackanswers.network.Answer
 import com.example.stackanswers.network.Question
-import com.example.stackanswers.network.StackAnswerApi
-import com.example.stackanswers.network.StackAnswerApiService
 import kotlinx.coroutines.*
-import retrofit2.Retrofit
 import timber.log.Timber
-import java.lang.Exception
 
 class QuestionFragment : Fragment() {
     // Set up the coroutine

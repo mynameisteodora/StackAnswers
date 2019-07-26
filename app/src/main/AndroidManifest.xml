@@ -13,17 +13,17 @@
             android:theme="@style/AppTheme">
         <activity
                 android:name=".settings.SettingsActivity"
-                android:parentActivityName=".MainActivity">
+                android:parentActivityName=".start.MainActivity">
                 <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".MainActivity"/>
+                    android:value=".start.MainActivity"/>
         </activity>
         <activity
                 android:name=".bookmarks.BookmarksActivity"
-                android:parentActivityName=".MainActivity">
+                android:parentActivityName=".start.MainActivity">
         </activity> <!-- android:usesCleartextTraffic="true" -->
         <activity
-                android:name=".MainActivity"
+                android:name=".start.MainActivity"
                 android:launchMode="singleTop">  <!--When we navigate back from the child activities, this prevents the program from rebuilding the activity-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

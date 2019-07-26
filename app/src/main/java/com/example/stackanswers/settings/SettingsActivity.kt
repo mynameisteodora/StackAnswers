@@ -1,11 +1,13 @@
 package com.example.stackanswers.settings
 
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.core.app.NavUtils
+import androidx.preference.PreferenceManager
 import com.example.stackanswers.R
 
 class SettingsActivity : AppCompatActivity() {
@@ -19,6 +21,8 @@ class SettingsActivity : AppCompatActivity() {
          */
         val actionBar = this.supportActionBar
         if (actionBar != null) actionBar.setDisplayHomeAsUpEnabled(true)
+
+        defaultSetup()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -33,5 +37,9 @@ class SettingsActivity : AppCompatActivity() {
             NavUtils.navigateUpFromSameTask(this)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun defaultSetup() {
+
     }
 }

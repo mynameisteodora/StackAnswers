@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="@string/show_suggestions_key"
+        android:summaryOff="Suggestions off"
+        android:summaryOn="Suggestions on"
+        android:title="Show suggestions"/>
 
 </PreferenceScreen>
